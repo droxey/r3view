@@ -1,0 +1,30 @@
+{
+  "name": "r3view",
+  "version": "1.0.0",
+  "description": "real code, real collaboration, real time solutions",
+  "main": "socketio.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/droxey/r3view.git"
+  },
+  "author": "Dani Roxberry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/droxey/r3view/issues"
+  },
+  "homepage": "https://github.com/droxey/r3view#readme",
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "compression": "1.7.1",
+    "cookie-parser": "1.4.3",
+    "express": "4.16.2",
+    "express-handlebars": "3.0.0",
+    "express-ws": "3.0.0",
+    "method-override": "2.3.10",
+    "serve-favicon": "2.4.5",
+    "sockjs": "0.3.19"
+  }
+}

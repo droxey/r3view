@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+          <meta name="description" content="r3view: real code, real collaboration, real time solutions.">
+          <meta name="author" content="Dani Roxberry @ bitoriented inc / PT Instructor UC Berkeley Extension, San Francisco">
+          <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+
+          <title>:: r3view.live ::</title>
+
+          <link href="ux/css/style.default.css" rel="stylesheet">
+
+          <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+          <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+          <![endif]-->
+        <title>r3view.live ::</title>
+        <script src="/js/sockjs/sockjs.min.js"></script>
+        <link href="/ux/css/font.roboto.css" rel="stylesheet">
+        <style>
+            #editor {
+                position: absolute;
+                width: 500px;
+                height: 400px;
+            }
+        </style>
+    </head>
+
+
+    <body>
+        <div id="editor"></div>
+        {{{ body }}}
+    </body>
+
+
+    <script src="/js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/ace/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/ace/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/twilight");
+        editor.session.setMode(new JavaScriptMode());
+    </script>
+</html>

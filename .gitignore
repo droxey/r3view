@@ -105,3 +105,6 @@ local_settings.py
 
 # node
 node_modules/
+
+
+*.DS_Store
