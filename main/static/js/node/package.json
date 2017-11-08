@@ -1,0 +1,19 @@
+{
+  "name": "r3view",
+  "version": "1.0.0",
+  "description": "real code, real collaboration, real time solutions",
+  "main": "socketio.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/droxey/r3view.git"
+  },
+  "author": "Dani Roxberry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/droxey/r3view/issues"
+  },
+  "homepage": "https://github.com/droxey/r3view#readme"
+}
