@@ -1,0 +1,54 @@
+{% load staticfiles compress %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta name="description" content="r3view: real code, real collaboration, real time solutions.">
+        <meta name="author" content="Dani Roxberry / Instructor, UC Berkeley San Francisco">
+        <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/png">
+        <title>:: r3view.live ::</title>
+        {% compress css %}
+            <link href="{% static 'ux/css/style.default.css' %}" rel="stylesheet">
+            <link href="{% static 'ux/css/font.roboto.css' %}" rel="stylesheet">
+            <style>
+                #editor {
+                    position: absolute;
+                    width: 500px;
+                    height: 400px;
+                }
+            </style>
+        {% endcompress %}
+        <!--[if lt IE 9]>
+            {% compress js %}
+                <script src="{% static 'ux/js/html5shiv.js' %}"></script>
+                <script src="{% static 'ux/js/respond.min.js' %}"></script>
+            {% endcompress %}
+        <![endif]-->
+        <title>:: r3view.live ::</title>
+    </head>
+    <body>
+        <div id="editor"></div>
+    </body>
+    {% compress js %}
+        <script src="{% static 'js/sockjs/sockjs.min.js' %}"></script>
+        <script>
+            var sock = new SockJS('{{ ws_url }}');
+            sock.connection = function() {
+                console.log('[info] Client WebSocket connection established.')
+            };
+            sock.onmessage = function(msg) {
+                console.log('[info] Client received data:', msg.data);
+            };
+        </script>
+        <script src="{% static 'js/ace/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script src="{% static 'js/ace/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script src="{% static 'js/ace/theme-twilight.js' %}" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var JavaScriptMode = ace.require("ace/mode/javascript").Mode;
+            var editor = ace.edit("editor");
+            editor.setTheme("ace/theme/twilight");
+            editor.session.setMode(new JavaScriptMode());
+        </script>
+    {% endcompress %}
+</html>

@@ -16,7 +16,7 @@ var config = {
     app: {
       name: 'r3view-live'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3456,
   }
 };
 

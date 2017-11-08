@@ -5,6 +5,10 @@ import os
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
 # ===
+ADMINS = (
+    ('Dani Roxberry', 'dani@bitoriented.com'),
+)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
@@ -21,10 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third Party
-
+    'compressor',
 
     # Custom
-    'main.dashboard',
+    'core.dashboard',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +41,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'main.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -57,7 +61,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'main.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # ===
 # Database
@@ -89,11 +93,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'github_oauth.authentication.GithubOAuthentication',
-)
-
-
 # ===
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -109,12 +108,42 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # ===
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    STATIC_ROOT
+]
+STATICFILES_FINDERS = [
+    'compressor.finders.CompressorFinder'
 ]
 
+
+# ===
+# Celery
+# ===
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+
+# ===
+# django-compressor
+# ===
+COMPRESS_ENABLED = True
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
+
+# ===
+# r3 specific settings
+# ===
+SOCKJS_PORT = 3456
+SOCKJS_WS_ECHO = 'echo'
+
+
+# ===
+# Load up local_settings.py --- omitted from git!
+# Should only exist on your local machine.
+# ===
 try:
-    from main.local_settings import *
+    from core.local_settings import *
 except:
     pass
