@@ -1,16 +1,18 @@
+XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest; // not required if we don't need XHR
 let opensearch = require('opensearch-browser');
 
-//opensearch.config({ useXHR: true, });
+opensearch.config({ useXHR: true, }); // may not be nessessary
 
+// schema located at: http://devdocs.io/opensearch.xml
 module.exports = {
     searchDocumentation: function(searchTerm) {
-        opensearch.discover('http://devdocs.io/').then((service) => {
-            var mimeType = null;
+        opensearch.discover('http://devdocs.io/#q=').then((service) => {
+            var mimeType = 'text/html';
             var raw = true;
             service.search({
-                searchTerms: searchTerm,
-                startIndex: 1
+                searchTerms: searchTerm
             }, mimeType, raw).then((results) => {
+                if (error) throw error;
                 console.log(results);
             });
         });

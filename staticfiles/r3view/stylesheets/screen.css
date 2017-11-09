@@ -94,78 +94,69 @@ h3.sidebartitle {
 #session #chat-container {
   height: -webkit-fill-available;
   position: relative;
-  margin-left: 1px;
+  left: -9px;
   margin-right: -20px;
 }
 /* line 36, ../sass/screen.scss */
-#session #chat-container #chat {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: #ccc;
-}
-/* line 44, ../sass/screen.scss */
-#session #chat-container #chat .nav-tabs,
-#session #chat-container #chat .tab-content {
-  border: 0 none;
+#session #chat-container .panel {
   border-radius: 0;
-  -webkit-border-radius: 0;
   -moz-border-radius: 0;
-  box-shadow: 0;
+  -webkit-border-radius: 0;
+  min-height: 350px;
+  margin-bottom: 1px;
 }
-/* line 55, ../sass/screen.scss */
-#session #chat-container #chat .nav-tabs li a {
-  border-radius: 0 !important;
+/* line 46, ../sass/screen.scss */
+#session #chat-container .panel ul li small {
+  font-size: 11px;
 }
-/* line 61, ../sass/screen.scss */
-#session #chat-container #chat .tab-content {
-  height: -webkit-fill-available;
+/* line 53, ../sass/screen.scss */
+#session #chat-container .panel-heading {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
-/* line 68, ../sass/screen.scss */
+/* line 61, ../sass/screen.scss */
 div.logopanel {
   border-right: 0 none;
 }
 
-/* line 72, ../sass/screen.scss */
+/* line 65, ../sass/screen.scss */
 .oauth-login-btn {
   display: block;
   margin: 9px 8px;
   font-weight: 500;
 }
 
-/* line 78, ../sass/screen.scss */
+/* line 71, ../sass/screen.scss */
 .headerbar .topnav > ul > li > a {
   padding: 18px 15px 17px 15px;
 }
 
-/* line 83, ../sass/screen.scss */
+/* line 76, ../sass/screen.scss */
 .mainpanel .contentpanel {
   padding: 0;
 }
 
-/* line 88, ../sass/screen.scss */
+/* line 81, ../sass/screen.scss */
 .pageheader {
   padding: 15px 7px;
 }
-/* line 91, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 .pageheader .fa {
   border-radius: 0;
   border: none;
 }
-/* line 96, ../sass/screen.scss */
+/* line 89, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper {
   right: 0;
   position: relative;
   bottom: 10px;
 }
-/* line 101, ../sass/screen.scss */
+/* line 94, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb {
   margin: 0;
 }
-/* line 105, ../sass/screen.scss */
+/* line 98, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb li a {
   display: inline-block;
   height: 52px;

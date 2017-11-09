@@ -30,40 +30,33 @@ h3.sidebartitle {
     #chat-container {
         height: -webkit-fill-available;
         position: relative;
-        margin-left: 1px;
+        left: -9px;
         margin-right: -20px;
 
-        #chat {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: #ccc;
+        .panel {
+            border-radius: 0;
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
 
-            .nav-tabs,
-            .tab-content {
-                border: 0 none;
-                border-radius: 0;
-                -webkit-border-radius: 0;
-                -moz-border-radius: 0;
-                box-shadow: 0;
-            }
+            min-height: 350px;
+            margin-bottom: 1px;
 
-            .nav-tabs {
+            ul {
                 li {
-                    a {
-                        border-radius: 0 !important;
+                    small {
+                        font-size: 11px;
                     }
                 }
             }
+        }
 
-            .tab-content {
-                height: -webkit-fill-available;
-            }
+        .panel-heading {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
     }
 }
+
 
 div.logopanel {
     border-right: 0 none;

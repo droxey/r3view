@@ -27,6 +27,7 @@
     "method-override": "2.3.10",
     "opensearch-browser": "1.0.4",
     "serve-favicon": "2.4.5",
-    "sockjs": "0.3.19"
+    "sockjs": "0.3.19",
+    "xmlhttprequest": "1.8.0"
   }
 }
