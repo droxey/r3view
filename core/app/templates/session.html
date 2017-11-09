@@ -27,7 +27,27 @@
 
 
 {% block center %}
-  <div id="editor"></div>
+  <div class="row">
+    <div id="editor"></div>
+  </div>
+  <div class="row">
+    <div id="chat">
+      <div class="col-sm-12">
+        <div class="panel panel-default panel-timeline">
+          <div class="panel-footer">
+              <div class="media">
+                  <a href="#" class="pull-left">
+                      <img alt="" src="{% static 'ux/images/photos/user3.png' %}" class="media-object">
+                  </a>
+                  <div class="media-body">
+                      <input type="text" class="form-control" placeholder="Write a comment">
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
 
 {% block endbody %}
