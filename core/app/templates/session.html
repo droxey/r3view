@@ -9,16 +9,20 @@
   {% endcompress %}
 {% endblock %}
 
+{% block left %}
+  <div class="leftpanelinner">
+    <h3 class="sidebartitle"><i class="fa fa-fw fa-folder"></i> Files &amp; Folders</h3>
+  </div>
+{% endblock %}
+
 
 {% block pageheader %}
   <div class="pageheader">
-    <h2><i class="fa far fa-github"></i> Session Title {% comment %}<span>https://www.github.com/droxey/reponame</span>{% endcomment %}</h2>
+    <h2><i class="fa far fa-code"></i> Title <span>...and a very brief summary about the application.</span></h2>
     <div class="breadcrumb-wrapper">
       <span class="label">Editing:</span>
       <ol class="breadcrumb">
-        <li><a href="">RepositoryName</a></li>
-        <li><a>ProjectFolder</a></li>
-        <li><a>ModuleFolder</a></li>
+        <li><a href="#todo">RepoName</a></li>
         <li class="active"><strong>CurrentActiveFile.js</strong></li>
       </ol>
     </div>
@@ -27,23 +31,36 @@
 
 
 {% block center %}
-  <div class="row">
     <div id="editor"></div>
-  </div>
-  <div class="row">
-    <div id="chat">
-      <div class="col-sm-12">
-        <div class="panel panel-default panel-timeline">
-          <div class="panel-footer">
-              <div class="media">
-                  <a href="#" class="pull-left">
-                      <img alt="" src="{% static 'ux/images/photos/user3.png' %}" class="media-object">
-                  </a>
-                  <div class="media-body">
-                      <input type="text" class="form-control" placeholder="Write a comment">
-                  </div>
-              </div>
-          </div>
+{% endblock %}
+
+{% block right %}
+<div class="panel-group panel-group-dark" id="accordion2">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2" class="collapsed">
+            Chat
+          </a>
+        </h4>
+      </div>
+      <div id="collapseOne2" class="panel-collapse collapse" style="height: 0px;">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" class="collapsed" data-parent="#accordion2" href="#collapseTwo2">
+            Documentation
+          </a>
+        </h4>
+      </div>
+      <div id="collapseTwo2" class="panel-collapse collapse">
+        <div class="panel-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
         </div>
       </div>
     </div>

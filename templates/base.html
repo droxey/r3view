@@ -29,15 +29,23 @@
   <div class="leftpanel">
     <div class="logopanel">
       <h1><span>[</span> r3view <span>]</span></h1>
-      </div>
-      <div class="leftpanelinner">
-        <h3 class="sidebartitle"><i class="fa fa-fw fa-folder"></i> Files &amp; Folders</h3>
-      </div>
-      {% block left %}{% endblock %}
+    </div>
+    {% block left %}{% endblock %}
     </div>
     <div class="mainpanel">
       <div class="headerbar">
-        <a class="menutoggle"><i class="fa fa-bars"></i></a>
+        <div class="topnav">
+            <a class="menutoggle"><i class="fa fa-bars"></i></a>
+            {% if request.user.is_authenticated %}
+              <ul class="nav nav-horizontal">
+                  <li class="active">
+                    <a href="{% url 'dashboard' request.user.username %}">
+                      <i class="fa fa-home"></i> <span>Dashboard</span>
+                    </a>
+                  </li>
+              </ul>
+            {% endif %}
+        </div>
         <div class="header-right">
             <ul class="headermenu">
               <li>
@@ -52,7 +60,7 @@
                       <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
                     </ul>
                     {% else %}
-                      <a class="btn btn-sm btn-success float-right oauth-login-btn" href="{% url 'social:begin' 'github' %}"><i class="fa fa-fw github-square"></i> Login via GitHub</a>
+                      <a class="btn btn-sm btn-success float-right oauth-login-btn" href="{% url 'social:begin' 'github' %}"><i class="fa fa-fw fa-github"></i> Login via GitHub</a>
                     {% endif %}
                   </div>
               </li>
@@ -65,10 +73,7 @@
       </div>
     </div>
     <div class="rightpanel">
-      <div class="rightpanelinner">
-        <h5 class="sidebartitle">Documentation</h5>
         {% block right %}{% endblock %}
-      </div>
     </div>
   </section>
   </body>

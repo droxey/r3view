@@ -11,22 +11,13 @@ h3.sidebartitle {
 }
 
 #editor {
-    margin: 0;
     position: absolute;
-    top: auto;
+    top: 0;
     left: 0;
     right: 0;
-    height: 415px;
-    font-size: 13px;
-}
-
-#chat {
-    margin: 0px -10px;
-    position: absolute;
-    top: 415px;
     bottom: 0;
-    left: 0;
-    right: 0;
+    font-size: 13px;
+    height: 40rem;
 }
 
 div.logopanel {
@@ -39,11 +30,8 @@ div.logopanel {
     font-weight: 500;
 }
 
-a.menutoggle {
-    display: none;
-    height: inherit;
-    width: inherit;
-    padding: 13px 14px 14px 14px;
+.headerbar .topnav > ul > li > a {
+    padding: 18px 15px 17px 15px;
 }
 
 .mainpanel {
@@ -52,3 +40,29 @@ a.menutoggle {
     }
 }
 
+.pageheader {
+    padding: 15px 7px;
+
+    .fa {
+        border-radius: 0;
+        border: none;
+    }
+
+    .breadcrumb-wrapper {
+        right: 0;
+        position: relative;
+        bottom: 10px;
+
+        ul.breadcrumb {
+            margin: 0;
+
+            li {
+                a {
+                    display: inline-block;
+                    height: 52px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
