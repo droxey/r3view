@@ -7,18 +7,16 @@ module.exports = function(app, server) {
     app.use('/', router);
 
     var sockJSEcho = sockjs.createServer();
+
     sockJSEcho.on('connection', function(conn) {
         conn.write("[info] Server WebSocket connection established.");
 
         conn.on('data', function(message) {
-            for (var c = 0; c < connections.length; c++) {
-                connections[c].write("User " + number + " says: " + message);
-            }
+            conn.write('[info] Server received data:', message);
         });
+
         conn.on('close', function() {
-            for (var c = 0; c < connections.length; c++) {
-                connections[c].write("User " + number + " has disconnected");
-            }
+            conn.write('[info] User disconnected.');
         });
     });
 

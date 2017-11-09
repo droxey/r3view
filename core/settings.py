@@ -16,6 +16,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    # 3rd Party (overrides)
+    'jet',
+    'jet.dashboard',
+
     # Django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,11 +28,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third Party
+    # 3rd Party
+    'social_django',
     'compressor',
 
     # Custom
-    'core.dashboard',
+    'core.app',
 ]
 
 MIDDLEWARE = [
@@ -39,6 +44,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -56,12 +62,35 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
+
+# ===
+# django_social
+# ===
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_STRATEGY = 'social_django.strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
+SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
+SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'app.mail.send_validation'
+SOCIAL_AUTH_EMAIL_VALIDATION_URL = '/email-sent/'
+SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
+
 
 # ===
 # Database
@@ -137,6 +166,17 @@ COMPRESS_ROOT = STATIC_ROOT
 # ===
 SOCKJS_PORT = 3456
 SOCKJS_WS_ECHO = 'echo'
+
+
+# ===
+# GitHub oAuth integration
+# ===
+GITHUB_REDIRECT = 'https://github.com/login/oauth/authorize'
+GITHUB_REDIRECT_EXCHANGE = 'https://github.com/login/oauth/access_token'
+GITHUB_API = 'https://api.github.com/user'
+SOCIAL_AUTH_GITHUB_KEY = ''
+SOCIAL_AUTH_GITHUB_SECRET = ''
+REDIRECT_URL = ''
 
 
 # ===

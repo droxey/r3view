@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load staticfiles compress %}
+
+
+{% block endhead %}
+  {% compress js %}
+    <script src="{% static 'js/sockjs/sockjs.min.js' %}"></script>
+    <script>
+      var isDebug = '{{ is_debug }}' === 'True';
+      var sock = new SockJS('{{ ws_url }}', {
+        debug: isDebug,
+      });
+      sock.connection = function() {
+        console.log('[info] Client WebSocket connection established.')
+      };
+      sock.onmessage = function(msg) {
+        console.log('[info] Client received data:', msg.data);
+      };
+    </script>
+  {% endcompress %}
+{% endblock %}
+
+
+{% block center %}
+  <div id="editor"></div>
+{% endblock %}
+
+{% block right %}
+{% endblock %}
+
+{% block endbody %}
+  {% compress js %}
+    <script src="{% static 'js/ace/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/theme-tomorrow.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/ext-modelist.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'r3view/js/session.js' %}" type="text/javascript" charset="utf-8"></script>
+  {% endcompress %}
+{% endblock %}

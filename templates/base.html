@@ -1,0 +1,86 @@
+{% load staticfiles compress %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="r3view: real code, real collaboration, real time solutions.">
+    <meta name="author" content="Dani Roxberry / Instructor, UC Berkeley San Francisco">
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/png">
+    <title>[ r3view ]</title>
+    {% compress css %}
+      <link href="{% static 'ux/css/style.default.css' %}" media="screen, projection" rel="stylesheet">
+      <link href="{% static 'ux/css/style.inverse.css' %}" media="screen, projection" rel="stylesheet">
+      <link href="{% static 'r3view/stylesheets/screen.css' %}" media="screen, projection" rel="stylesheet">
+    {% endcompress %}
+    <!--[if lt IE 9]>
+      {% compress js %}
+        <script src="{% static 'ux/js/html5shiv.js' %}"></script>
+        <script src="{% static 'ux/js/respond.min.js' %}"></script>
+      {% endcompress %}
+    <![endif]-->
+    {% block endhead %}{% endblock %}
+</head>
+<body>
+<div id="preloader">
+  <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<section>
+  <div class="leftpanel">
+    <div class="logopanel">
+      <h1><span>[</span> r3view <span>]</span></h1>
+      </div>
+      <div class="leftpanelinner">
+        <h5 class="sidebartitle">Files &amp; Folders</h5>
+        {% block left %}{% endblock %}
+      </div>
+    </div>
+    <div class="mainpanel">
+      <div class="headerbar">
+        <a class="menutoggle"><i class="fa fa-bars"></i></a>
+        <div class="header-right">
+            <ul class="headermenu">
+              <li>
+                {% if request.user.is_authenticated %}
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <img src="{% static 'ux/images/photos/loggeduser.png' %}" alt="" />
+                    {{ request.user.username }}
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                      <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
+                    </ul>
+                  </div>
+                {% else %}
+                  <a href="{% url 'social:begin' 'github' %}"><i class="glyphicon glyphicon-log-in"></i> Login with GitHub</a>
+                {% endif %}
+              </li>
+            </ul>
+        </div>
+      </div>
+      <div class="contentpanel">
+        {% block center %}{% endblock %}
+      </div>
+    </div>
+    <div class="rightpanel">
+      <div class="rightpanelinner">
+        <h5 class="sidebartitle">Documentation</h5>
+        {% block right %}{% endblock %}
+      </div>
+    </div>
+  </section>
+  </body>
+  {% compress js %}
+    <script src="{% static 'ux/js/jquery-1.11.1.min.js' %}"></script>
+    <script src="{% static 'ux/js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'ux/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'ux/js/modernizr.min.js' %}"></script>
+    <script src="{% static 'ux/js/jquery.sparkline.min.js' %}"></script>
+    <script src="{% static 'ux/js/toggles.min.js' %}"></script>
+    <script src="{% static 'ux/js/retina.min.js' %}"></script>
+    <script src="{% static 'ux/js/jquery.cookies.js' %}"></script>
+    <script src="{% static 'ux/js/custom.js' %}"></script>
+  {% endcompress %}
+  {% block endbody %}{% endblock %}
+</html>
