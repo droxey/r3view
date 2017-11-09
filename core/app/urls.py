@@ -3,6 +3,10 @@ from core.app import views
 
 
 urlpatterns = [
+    url(r'^ajax-auth/(?P<backend>[^/]+)/$',
+        views.ajax_auth,
+        name='oauth-ajax-auth'),
+
     url(r'^(?P<username>.*)/dashboard/$',
         views.dashboard,
         name='dashboard'),
