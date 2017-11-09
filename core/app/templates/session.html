@@ -44,7 +44,21 @@
     </div>
     <div id="chat-container" class="col-md-4">
       <div id="chat">
-
+        <ul class="nav nav-tabs nav-justified nav-dark">
+          <li class="active"><a href="#chat-tab" data-toggle="tab"><strong>Chat</strong></a></li>
+          <li><a href="#docs-tab" data-toggle="tab"><strong>Documentation</strong></a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="chat-tab">
+            <h4 class="dark">Chat</h4>
+            <p>chat goes here</p>
+          </div>
+          <div class="tab-pane" id="docs-tab">
+            <h4 class="dark">Documentation</h4>
+            <p>documentation goes here</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

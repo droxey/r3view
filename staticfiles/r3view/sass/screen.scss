@@ -40,6 +40,27 @@ h3.sidebartitle {
             bottom: 0;
             left: 0;
             background: #ccc;
+
+            .nav-tabs,
+            .tab-content {
+                border: 0 none;
+                border-radius: 0;
+                -webkit-border-radius: 0;
+                -moz-border-radius: 0;
+                box-shadow: 0;
+            }
+
+            .nav-tabs {
+                li {
+                    a {
+                        border-radius: 0 !important;
+                    }
+                }
+            }
+
+            .tab-content {
+                height: -webkit-fill-available;
+            }
         }
     }
 }

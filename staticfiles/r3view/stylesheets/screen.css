@@ -106,49 +106,66 @@ h3.sidebartitle {
   left: 0;
   background: #ccc;
 }
+/* line 44, ../sass/screen.scss */
+#session #chat-container #chat .nav-tabs,
+#session #chat-container #chat .tab-content {
+  border: 0 none;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  box-shadow: 0;
+}
+/* line 55, ../sass/screen.scss */
+#session #chat-container #chat .nav-tabs li a {
+  border-radius: 0 !important;
+}
+/* line 61, ../sass/screen.scss */
+#session #chat-container #chat .tab-content {
+  height: -webkit-fill-available;
+}
 
-/* line 47, ../sass/screen.scss */
+/* line 68, ../sass/screen.scss */
 div.logopanel {
   border-right: 0 none;
 }
 
-/* line 51, ../sass/screen.scss */
+/* line 72, ../sass/screen.scss */
 .oauth-login-btn {
   display: block;
   margin: 9px 8px;
   font-weight: 500;
 }
 
-/* line 57, ../sass/screen.scss */
+/* line 78, ../sass/screen.scss */
 .headerbar .topnav > ul > li > a {
   padding: 18px 15px 17px 15px;
 }
 
-/* line 62, ../sass/screen.scss */
+/* line 83, ../sass/screen.scss */
 .mainpanel .contentpanel {
   padding: 0;
 }
 
-/* line 67, ../sass/screen.scss */
+/* line 88, ../sass/screen.scss */
 .pageheader {
   padding: 15px 7px;
 }
-/* line 70, ../sass/screen.scss */
+/* line 91, ../sass/screen.scss */
 .pageheader .fa {
   border-radius: 0;
   border: none;
 }
-/* line 75, ../sass/screen.scss */
+/* line 96, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper {
   right: 0;
   position: relative;
   bottom: 10px;
 }
-/* line 80, ../sass/screen.scss */
+/* line 101, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb {
   margin: 0;
 }
-/* line 84, ../sass/screen.scss */
+/* line 105, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb li a {
   display: inline-block;
   height: 52px;
