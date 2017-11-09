@@ -1,7 +1,3 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 /* line 5, ../../../../../../../../Applications/compass.app/Contents/Resources/lib/ruby/compass_1.0/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -67,18 +63,50 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 7, ../sass/screen.scss */
+/* line 3, ../sass/screen.scss */
 body {
   overflow: hidden;
 }
 
-/* line 11, ../sass/screen.scss */
+/* line 7, ../sass/screen.scss */
+h3.sidebartitle {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+/* line 13, ../sass/screen.scss */
 #editor {
   margin: 0;
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: auto;
   left: 0;
   right: 0;
-  height: 350px;
+  height: 415px;
+  font-size: 13px;
+}
+
+/* line 23, ../sass/screen.scss */
+div.logopanel {
+  border-right: 0 none;
+}
+
+/* line 27, ../sass/screen.scss */
+.oauth-login-btn {
+  display: block;
+  margin: 9px 8px;
+  font-weight: 500;
+}
+
+/* line 33, ../sass/screen.scss */
+a.menutoggle {
+  display: none;
+  height: inherit;
+  width: inherit;
+  padding: 13px 14px 14px 14px;
+}
+
+/* line 41, ../sass/screen.scss */
+.mainpanel .contentpanel {
+  padding: 0;
 }

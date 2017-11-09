@@ -1,20 +1,45 @@
-/* Welcome to Compass.
- * In this file you should write your main styles. (or centralize your imports)
- * Import this file using the following HTML or equivalent:
- * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 @import "compass/reset";
 
 body {
     overflow: hidden;
 }
 
+h3.sidebartitle {
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
 #editor {
     margin: 0;
     position: absolute;
-    top: 0;
-    bottom: 0;
+    top: auto;
     left: 0;
     right: 0;
-    height: 350px;
+    height: 415px;
+    font-size: 13px;
+}
+
+div.logopanel {
+    border-right: 0 none;
+}
+
+.oauth-login-btn {
+    display: block;
+    margin: 9px 8px;
+    font-weight: 500;
+}
+
+a.menutoggle {
+    display: none;
+    height: inherit;
+    width: inherit;
+    padding: 13px 14px 14px 14px;
+}
+
+.mainpanel {
+    .contentpanel {
+        padding: 0;
+    }
 }
 

@@ -31,9 +31,9 @@
       <h1><span>[</span> r3view <span>]</span></h1>
       </div>
       <div class="leftpanelinner">
-        <h5 class="sidebartitle">Files &amp; Folders</h5>
-        {% block left %}{% endblock %}
+        <h3 class="sidebartitle"><i class="fa fa-fw fa-folder"></i> Files &amp; Folders</h3>
       </div>
+      {% block left %}{% endblock %}
     </div>
     <div class="mainpanel">
       <div class="headerbar">
@@ -51,14 +51,15 @@
                     <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
                       <li><a href="{% url 'logout' %}"><i class="glyphicon glyphicon-log-out"></i> Logout</a></li>
                     </ul>
+                    {% else %}
+                      <a class="btn btn-sm btn-success float-right oauth-login-btn" href="{% url 'social:begin' 'github' %}"><i class="fa fa-fw github-square"></i> Login via GitHub</a>
+                    {% endif %}
                   </div>
-                {% else %}
-                  <a href="{% url 'social:begin' 'github' %}"><i class="glyphicon glyphicon-log-in"></i> Login with GitHub</a>
-                {% endif %}
               </li>
             </ul>
         </div>
       </div>
+      {% block pageheader %}{% endblock %}
       <div class="contentpanel">
         {% block center %}{% endblock %}
       </div>
@@ -76,7 +77,6 @@
     <script src="{% static 'ux/js/jquery-migrate-1.2.1.min.js' %}"></script>
     <script src="{% static 'ux/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'ux/js/modernizr.min.js' %}"></script>
-    <script src="{% static 'ux/js/jquery.sparkline.min.js' %}"></script>
     <script src="{% static 'ux/js/toggles.min.js' %}"></script>
     <script src="{% static 'ux/js/retina.min.js' %}"></script>
     <script src="{% static 'ux/js/jquery.cookies.js' %}"></script>

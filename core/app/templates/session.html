@@ -4,7 +4,41 @@
 
 {% block endhead %}
   {% compress js %}
-    <script src="{% static 'js/sockjs/sockjs.min.js' %}"></script>
+
+
+  {% endcompress %}
+{% endblock %}
+
+
+{% block pageheader %}
+  <div class="pageheader">
+    <h2><i class="fa far fa-github"></i> Session Title {% comment %}<span>https://www.github.com/droxey/reponame</span>{% endcomment %}</h2>
+    <div class="breadcrumb-wrapper">
+      <span class="label">Editing:</span>
+      <ol class="breadcrumb">
+        <li><a href="">RepositoryName</a></li>
+        <li><a>ProjectFolder</a></li>
+        <li><a>ModuleFolder</a></li>
+        <li class="active"><strong>CurrentActiveFile.js</strong></li>
+      </ol>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block center %}
+  <div id="editor"></div>
+{% endblock %}
+
+{% block endbody %}
+  {% compress js %}
+    <script src="{% static 'js/sockjs/sockjs.min.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/ace.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/theme-tomorrow.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/ext-modelist.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'js/ace/ext-language_tools.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'r3view/js/session.js' %}" type="text/javascript" charset="utf-8"></script>
     <script>
       var isDebug = '{{ is_debug }}' === 'True';
       var sock = new SockJS('{{ ws_url }}', {
@@ -17,23 +51,5 @@
         console.log('[info] Client received data:', msg.data);
       };
     </script>
-  {% endcompress %}
-{% endblock %}
-
-
-{% block center %}
-  <div id="editor"></div>
-{% endblock %}
-
-{% block right %}
-{% endblock %}
-
-{% block endbody %}
-  {% compress js %}
-    <script src="{% static 'js/ace/ace.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static 'js/ace/theme-tomorrow.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static 'js/ace/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static 'js/ace/ext-modelist.js' %}" type="text/javascript" charset="utf-8"></script>
-    <script src="{% static 'r3view/js/session.js' %}" type="text/javascript" charset="utf-8"></script>
   {% endcompress %}
 {% endblock %}

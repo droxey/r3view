@@ -160,7 +160,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # ===
 # django-compressor
 # ===
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
 
