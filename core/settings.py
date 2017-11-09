@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
     # 3rd Party
@@ -38,12 +40,16 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
     'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
@@ -137,14 +143,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # ===
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    STATIC_ROOT
-]
-STATICFILES_FINDERS = [
-    'compressor.finders.CompressorFinder'
-]
+STATICFILES_DIRS = [ STATIC_ROOT ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_FINDERS = [ 'compressor.finders.CompressorFinder' ]
 
 
 # ===
