@@ -10,14 +10,38 @@ h3.sidebartitle {
     padding: 10px 0;
 }
 
-#editor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    font-size: 13px;
-    height: 40rem;
+#session {
+
+    #editor-container {
+        height: -webkit-fill-available;
+        position: relative;
+        margin-left: 10px;
+
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            font-size: 13px;
+        }
+    }
+
+    #chat-container {
+        height: -webkit-fill-available;
+        position: relative;
+        margin-left: 1px;
+        margin-right: -20px;
+
+        #chat {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: #ccc;
+        }
+    }
 }
 
 div.logopanel {

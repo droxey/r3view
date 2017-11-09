@@ -75,59 +75,80 @@ h3.sidebartitle {
   padding: 10px 0;
 }
 
-/* line 13, ../sass/screen.scss */
-#editor {
+/* line 15, ../sass/screen.scss */
+#session #editor-container {
+  height: -webkit-fill-available;
+  position: relative;
+  margin-left: 10px;
+}
+/* line 20, ../sass/screen.scss */
+#session #editor-container #editor {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   font-size: 13px;
-  height: 40rem;
+}
+/* line 30, ../sass/screen.scss */
+#session #chat-container {
+  height: -webkit-fill-available;
+  position: relative;
+  margin-left: 1px;
+  margin-right: -20px;
+}
+/* line 36, ../sass/screen.scss */
+#session #chat-container #chat {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #ccc;
 }
 
-/* line 23, ../sass/screen.scss */
+/* line 47, ../sass/screen.scss */
 div.logopanel {
   border-right: 0 none;
 }
 
-/* line 27, ../sass/screen.scss */
+/* line 51, ../sass/screen.scss */
 .oauth-login-btn {
   display: block;
   margin: 9px 8px;
   font-weight: 500;
 }
 
-/* line 33, ../sass/screen.scss */
+/* line 57, ../sass/screen.scss */
 .headerbar .topnav > ul > li > a {
   padding: 18px 15px 17px 15px;
 }
 
-/* line 38, ../sass/screen.scss */
+/* line 62, ../sass/screen.scss */
 .mainpanel .contentpanel {
   padding: 0;
 }
 
-/* line 43, ../sass/screen.scss */
+/* line 67, ../sass/screen.scss */
 .pageheader {
   padding: 15px 7px;
 }
-/* line 46, ../sass/screen.scss */
+/* line 70, ../sass/screen.scss */
 .pageheader .fa {
   border-radius: 0;
   border: none;
 }
-/* line 51, ../sass/screen.scss */
+/* line 75, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper {
   right: 0;
   position: relative;
   bottom: 10px;
 }
-/* line 56, ../sass/screen.scss */
+/* line 80, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb {
   margin: 0;
 }
-/* line 60, ../sass/screen.scss */
+/* line 84, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb li a {
   display: inline-block;
   height: 52px;

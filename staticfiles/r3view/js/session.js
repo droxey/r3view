@@ -33,6 +33,8 @@ class CodeSession {
 
     socket.connection = function() {
         console.log('[info] Client WebSocket connection established.')
+        // TODO: Send data to server with the access_token for github,
+        // if the logged in user owns this repository
     };
 
     socket.onmessage = function(msg) {
@@ -40,5 +42,9 @@ class CodeSession {
     };
 
     return socket;
+  }
+
+  sendDataToServer(channel, message) {
+    // TODO: implement
   }
 }
