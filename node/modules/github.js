@@ -22,8 +22,11 @@ module.exports = function(socket, token) {
         }
 
         repo.getTree('master', function(err, tree) {
-            socket.broadcast(tree);
+            socket.data({
+                'channel': 'abcde',
+                'data': JSON.parse(tree.tree),
+                'event': 'GET_REPO_TREE'
+            });
         });
     });
 };
-
