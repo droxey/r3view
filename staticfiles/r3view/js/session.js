@@ -36,10 +36,11 @@ class CodeSession {
         console.log('[info] Client WebSocket connection established.')
         // TODO: Send data to server with the access_token for github,
         // if the logged in user owns this repository
+        this.sendDataToServer('hi', 'hello');
     };
 
-    socket.onmessage = function(msg) {
-        console.log('[info] Client received data:', msg.data);
+    socket.onmessage = function(data) {
+        console.log('[info] Client received data:', data.message);
     };
 
     return socket;
@@ -53,6 +54,10 @@ class CodeSession {
   }
 
   sendDataToServer(channel, message) {
-    // TODO: implement
-  }
+      var send = {
+        channel: channel,
+        message: message
+      };
+      this.socket.send(JSON.stringify(send));
+    }
 }
