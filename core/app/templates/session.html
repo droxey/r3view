@@ -73,14 +73,11 @@
               <iframe id="devdocs" src="http://devdocs.io" scrolling="yes" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"></iframe>
             </div>
           </div>
-        </div>
       </div>
+    </div>
   </div>
 {% endblock %}
 
-{% block right %}
-
-{% endblock %}
 
 {% block endbody %}
   {% compress js %}
@@ -93,7 +90,7 @@
     <script src="{% static 'r3view/js/session.js' %}" type="text/javascript" charset="utf-8"></script>
     <script>
       // Initialize the session.
-      const currentSession = new CodeSession('token', '{{ ws_url }}');
+      const currentSession = new CodeSession('{{ token }}', '{{ ws_url }}');
     </script>
   {% endcompress %}
 {% endblock %}

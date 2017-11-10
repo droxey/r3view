@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 
 from social_core.backends.oauth import BaseOAuth1, BaseOAuth2
+from social_django.models import UserSocialAuth
 from social_django.utils import psa
 
 
@@ -17,15 +18,21 @@ def dashboard(request, username):
 
 @login_required
 def session(request, username, session_id=None):
-    if not session_id:
-        # TODO: create new session
-        pass
     ws_url = '//{}:{}/{}'.format(settings.SITE_DOMAIN,
                                  settings.SOCKJS_PORT,
                                  settings.SOCKJS_WS_ECHO)
+    if not session_id:
+        # TODO: create new session
+        pass
+    try:
+        oauth = UserSocialAuth.objects.get(user=request.user, provider='github')
+        token = oauth.extra_data['access_token']
+    except UserSocialAuth.DoesNotExist:
+        token = None
+
     return render(request, 'session.html', {
         'ws_url': ws_url,
-        'is_debug': settings.DEBUG
+        'token': token
     })
 
 
