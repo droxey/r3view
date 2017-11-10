@@ -47,7 +47,7 @@ class CodeSession {
 
   initDocs() {
     var devDocs = jQuery('#devdocs');
-    devDocs.css({ 'zoom': '120%', 'width': '100%', 'height': '285px', 'border-bottom': '1px solid #e4e7ea'});
+    devDocs.css({ 'zoom': '150%', 'width': '100%', 'height': '266px'});
 
     return devDocs;
   }

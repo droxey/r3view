@@ -4,8 +4,14 @@ body {
     overflow: hidden;
 }
 
+section {
+    height: 950px;
+    overflow-y: hidden;
+    border-bottom: 1px solid #e4e7ea;
+}
+
 .mainpanel {
-    height: 900px !important;
+    height: 950px;
 }
 
 h3.sidebartitle {
@@ -15,9 +21,6 @@ h3.sidebartitle {
 }
 
 #session {
-    height: 720px;
-
-
     #editor-container {
       height: 100%;
       position: relative;
@@ -39,7 +42,7 @@ h3.sidebartitle {
 
         #chat,
         #docs {
-            height: 448px;
+            height: 425px;
             width: 100%;
             margin: 0;
             background: white;
@@ -59,8 +62,6 @@ h3.sidebartitle {
                     }
                 }
             }
-
-
 
 
 
