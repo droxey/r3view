@@ -66,19 +66,19 @@ class CodeSession {
         console.log('[info] Client received data:', message);
 
         switch(message.event) {
-            case 'GH_USER_GET_REPOS':
+            case this.eventTypes.GH_USER_GET_REPOS:
             break;
-            case 'GH_USER_SELECT_REPO':
+            case this.eventTypes.GH_USER_SELECT_REPO:
             break;
-            case 'GH_USER_SELECT_FILE':
+            case this.eventTypes.GH_USER_SELECT_FILE:
             break;
-            case 'GH_RENDER_REPO_TREE':
+            case this.eventTypes.GH_RENDER_REPO_TREE:
             break;
-            case 'CHAT_SEND_MESSAGE':
+            case this.eventTypes.CHAT_SEND_MESSAGE:
             break;
-            case 'CHAT_RECEIVED_MESSAGE':
+            case this.eventTypes.CHAT_RECEIVED_MESSAGE:
             break;
-            case 'CHAT_LOAD_STREAM':
+            case this.eventTypes.CHAT_LOAD_STREAM:
             break;
             default:
                 console.log('Unkown event type:', message.event);

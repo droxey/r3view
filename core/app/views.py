@@ -10,6 +10,8 @@ from social_core.backends.oauth import BaseOAuth1, BaseOAuth2
 from social_django.models import UserSocialAuth
 from social_django.utils import psa
 
+from core.app.models import CodeSession, CodeSessionForm
+
 
 @login_required
 def dashboard(request, username):
@@ -17,22 +19,39 @@ def dashboard(request, username):
 
 
 @login_required
-def session(request, username, session_id=None):
+def session(request, slug):
     ws_url = '//{}:{}/{}'.format(settings.SITE_DOMAIN,
                                  settings.SOCKJS_PORT,
                                  settings.SOCKJS_WS_ECHO)
-    if not session_id:
-        # TODO: create new session
-        pass
     try:
-        oauth = UserSocialAuth.objects.get(user=request.user, provider='github')
+        session = CodeSession.objects.get(slug=slug)
+        oauth = UserSocialAuth.objects.get(user=session.owner, provider='github')
         token = oauth.extra_data['access_token']
+    except CodeSession.DoesNotExist:
+        return redirect('launch')
     except UserSocialAuth.DoesNotExist:
         token = None
 
     return render(request, 'session.html', {
         'ws_url': ws_url,
-        'token': token
+        'token': token,
+        'session': session
+    })
+
+
+@login_required
+def launch(request):
+    if request.method == "POST":
+        form = CodeSessionForm(request.POST)
+        if form.is_valid():
+            form.owner = request.user
+            form.driver = request.user
+            form.save()
+            return redirect('session', slug=session.slug)
+    else:
+        form = CodeSessionForm()
+    return render(request, 'launch.html', {
+        'form': form,
     })
 
 

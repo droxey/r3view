@@ -93,6 +93,27 @@ h3.sidebartitle {
     }
 }
 
+#session-form {
+    p {
+        margin-bottom: 15px;
+
+        label {
+            font-variant: all-petite-caps;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        span.helptext {
+            font-size: 11px;
+            line-height: 13px;
+        }
+    }
+}
+
 
 div.logopanel {
     border-right: 0 none;

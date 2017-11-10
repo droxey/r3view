@@ -17,7 +17,7 @@
           <p>Live code review and collaboration at the click of a button.</p>
           </div>
           <div class="panel-body">
-            <p><a class="btn btn-info" href="{% url 'session' request.user.username %}">Launch a Session</a></p>
+            <p><a class="btn btn-info btn-lg" href="{% url 'launch' %}" data-toggle="modal" data-target=".bs-example-modal-static"><i class fa fa-fw fa-add-circle"></i> Launch a Session</a></p>
           </div>
         </div>
       </div>
@@ -40,4 +40,12 @@
       </div>
 {% endblock %}
 
-{% block endbody %}{% endblock %}
+{% block endbody %}
+  <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
