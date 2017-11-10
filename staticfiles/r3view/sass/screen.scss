@@ -4,6 +4,10 @@ body {
     overflow: hidden;
 }
 
+.mainpanel {
+    height: 900px !important;
+}
+
 h3.sidebartitle {
     font-size: 13px;
     font-weight: bold;
@@ -11,11 +15,13 @@ h3.sidebartitle {
 }
 
 #session {
+    height: 720px;
+
 
     #editor-container {
-        height: -webkit-fill-available;
-        position: relative;
-        margin-left: 10px;
+      height: 100%;
+      position: relative;
+      left: 9px;
 
         #editor {
             position: absolute;
@@ -24,35 +30,64 @@ h3.sidebartitle {
             bottom: 0;
             left: 0;
             font-size: 13px;
+            height: 796px;
         }
     }
 
-    #chat-container {
-        height: -webkit-fill-available;
-        position: relative;
-        left: -9px;
-        margin-right: -20px;
+    #right-container {
+        height: 100%;
 
-        .panel {
-            border-radius: 0;
-            -moz-border-radius: 0;
-            -webkit-border-radius: 0;
+        #chat,
+        #docs {
+            height: 448px;
+            width: 100%;
+            margin: 0;
+            background: white;
 
-            min-height: 350px;
-            margin-bottom: 1px;
+            .panel {
+                border-radius: 0;
+                -moz-border-radius: 0;
+                -webkit-border-radius: 0;
+                box-shadow: none;
+                margin: 1px 0px 0 0;
 
-            ul {
-                li {
-                    small {
-                        font-size: 11px;
+                ul {
+                    li {
+                        small {
+                            font-size: 11px;
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+            .panel-heading {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                padding: 16px 20px;
+
+                h3.panel-title  {
+                    i.fa {
+                        display: inline-block;
+                        position: relative;
+                        left: -10px;
+                        font-size: 20px;
+                        vertical-align: middle;
+                        margin-top: 0;
                     }
                 }
             }
         }
 
-        .panel-heading {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
+        #docs {
+            margin-top: 1px;
+
+            #devdocs {
+
+            }
         }
     }
 }

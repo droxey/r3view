@@ -4,6 +4,7 @@ class CodeSession {
     this.token = accessToken;
     this.socket = this.initSocket();
     this.editor = this.initEditor();
+    this.docViewer = this.initDocs();
   }
 
   initEditor() {
@@ -42,6 +43,13 @@ class CodeSession {
     };
 
     return socket;
+  }
+
+  initDocs() {
+    var devDocs = jQuery('#devdocs');
+    devDocs.css({ 'zoom': '120%', 'width': '100%', 'height': '285px', 'border-bottom': '1px solid #e4e7ea'});
+
+    return devDocs;
   }
 
   sendDataToServer(channel, message) {

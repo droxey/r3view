@@ -33,59 +33,48 @@
 {% block center %}
   <div id="session" class="row">
     <div id="editor-container" class="col-md-8">
-      <div id="editor">
-      {% if is_debug %}
-      function foo(items) {
-        var x = "All this is syntax highlighted";
-        return x;
-      }
-      {% endif %}
+      <div id="editor"></div>
     </div>
-    </div>
-    <div id="chat-container" class="col-md-4">
-      <div id="chat">
-        <div class="panel panel-default panel-alt widget-messaging">
-          <div class="panel-heading">
-              <div class="panel-btns">
-
-              </div><!-- panel-btns -->
-              <h3 class="panel-title">Chat</h3>
+    <div id="right-container" class="col-md-4">
+      <div id="chat" class="row">
+          <div class="panel panel-default panel-alt widget-messaging">
+            <div class="panel-heading">
+                <div class="panel-btns"></div>
+                <h3 class="panel-title"><i class="fa fa-comments"></i> Chat</h3>
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <li>
+                    <small class="pull-right">Dec 10</small>
+                    <h4 class="sender">droxey</h4>
+                    <small>Lorem ipsum dolor sit amet...</small>
+                  </li>
+                  <li>
+                    <small class="pull-right">Dec 9</small>
+                    <h4 class="sender">somedude</h4>
+                    <small>Lorem ipsum dolor sit amet...</small>
+                  </li>
+                  <li>
+                    <small class="pull-right">Dec 9</small>
+                    <h4 class="sender">anotherguy</h4>
+                    <small>Lorem ipsum dolor sit amet...</small>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+      <div id="docs" class="row">
+          <div class="panel panel-default panel-alt widget-messaging">
+            <div class="panel-heading">
+              <div class="panel-btns"></div>
+              <h3 class="panel-title"><i class="fa fa-book"></i> Documentation</h3>
             </div>
             <div class="panel-body">
-              <ul>
-                <li>
-                  <small class="pull-right">Dec 10</small>
-                  <h4 class="sender">droxey</h4>
-                  <small>Lorem ipsum dolor sit amet...</small>
-                </li>
-                <li>
-                  <small class="pull-right">Dec 9</small>
-                  <h4 class="sender">somedude</h4>
-                  <small>Lorem ipsum dolor sit amet...</small>
-                </li>
-                <li>
-                  <small class="pull-right">Dec 9</small>
-                  <h4 class="sender">anotherguy</h4>
-                  <small>Lorem ipsum dolor sit amet...</small>
-                </li>
-              </ul>
-            </div><!-- panel-body -->
-          </div>
-      </div>
-      <div id="docs">
-        <div class="panel panel-default panel-alt widget-messaging">
-          <div class="panel-heading">
-              <div class="panel-btns">
-
-              </div><!-- panel-btns -->
-              <h3 class="panel-title">Documentation</h3>
+              <iframe id="devdocs" src="http://devdocs.io" scrolling="yes" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"></iframe>
             </div>
-            <div class="panel-body">
-
-            </div><!-- panel-body -->
           </div>
+        </div>
       </div>
-    </div>
   </div>
 {% endblock %}
 

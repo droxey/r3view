@@ -1,11 +1,45 @@
 {% extends "base.html" %}
 
-{% block endhead %}{% endblock %}
 
+{% block endhead %}{% endblock %}
 {% block left %}{% endblock %}
 
-{% block center %}{% endblock %}
+
+{% block center %}
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="" class="minimize">−</a>
+          </div>
+          <h2 class="panel-title">r3view: Getting Started</h2>
+          <p>Live code review and collaboration at the click of a button.</p>
+          </div>
+          <div class="panel-body">
+            <p><a class="btn btn-info" href="{% url 'session' request.user.username %}">Launch a Session</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-btns">
+              <a href="" class="minimize">−</a>
+            </div>
+            <h2 class="panel-title">r3wind: Past Sessions</h2>
+            <p>Need to revisit a past r3view session? Don't worry. We have your back.</p>
+            </div>
+            <div class="panel-body">
+
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
 
 {% block right %}{% endblock %}
-
 {% block endbody %}{% endblock %}

@@ -15,6 +15,10 @@ urlpatterns = [
         views.session,
         name='session'),
 
+    url(r'^(?P<username>.*)/start/$',
+        views.session,
+        name='session'),
+
     url(r'^terms/$', views.terms, name='terms'),
     url(r'^privacy/$', views.privacy, name='privacy'),
     url(r'^$', views.home, name='home'),
