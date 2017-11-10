@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # 3rd Party
     'social_django',
     'compressor',
+    'randomslugfield',
 
     # Custom
     'core.app',
@@ -181,6 +182,7 @@ SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
 REDIRECT_URL = ''
 
+RANDOMSLUG_LENGTH=9
 
 # ===
 # Load up local_settings.py --- omitted from git!
