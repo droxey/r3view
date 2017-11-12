@@ -9,14 +9,14 @@ var config = {
     app: {
       name: 'r3view-dev'
     },
-    port: process.env.PORT || 3456,
+    port: process.env.PORT || 7888,
   },
   production: {
     root: rootPath,
     app: {
       name: 'r3view-live'
     },
-    port: process.env.PORT || 3456,
+    port: process.env.PORT || 7888,
   }
 };
 

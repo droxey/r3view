@@ -38,7 +38,7 @@ TEMPLATES = [
 # ===
 # django-compressor
 # ===
-COMPRESS_ENABLED = DEBUG
+COMPRESS_ENABLED = False
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
 STATICFILES_FINDERS = ['compressor.finders.CompressorFinder']
@@ -176,7 +176,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # ===
 # r3 specific settings
 # ===
-SOCKJS_PORT = 3456
+SOCKJS_PORT = 7888
 SOCKJS_WS_ECHO = 'echo'
 SITE_DOMAIN = 'r3view.dev'
 WS_URL = '//{}:{}/{}'.format(SITE_DOMAIN, SOCKJS_PORT, SOCKJS_WS_ECHO)

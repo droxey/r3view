@@ -18,7 +18,10 @@ from core.app.models import CodeSession, CodeSessionForm
 
 @login_required
 def dashboard(request, username):
-    return render(request, 'app/dashboard.html', {})
+    sessions = CodeSession.objects.filter(owner=request.user)
+    return render(request, 'app/dashboard.html', {
+        'sessions': sessions
+    })
 
 def home(request):
     if request.user.is_authenticated():
@@ -64,19 +67,11 @@ class CodeSessionCreate(LoginRequiredMixin, AjaxableResponseMixin, CreateView):
     form_class = CodeSessionForm
 
     def form_valid(self, form):
-        name = '{}/{}'.format(
-            self.request.user.username,
-            str(form.fields['repo_url']).split('/')[:-1])
-        branch = 'heads/{}'.format(form.fields['repo_branch'])
-
         obj = form.save(commit=False)
-        obj.name = name
-        obj.repo_branch = branch
         obj.owner = self.request.user
         obj.driver = self.request.user
         obj.save()
-
-        return redirect(obj.get_absolute_url())
+        return JsonResponse({'url': obj.get_absolute_url()})
 
 
 class CodeSessionDetailView(AjaxableResponseMixin, DetailView):

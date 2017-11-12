@@ -1,17 +1,15 @@
 class CodeSession {
-  constructor(accessToken, websocketUrl) {
+  constructor(accessToken, websocketUrl, userData) {
+    this.userData = userData;
     this.websocketUrl = websocketUrl;
     this.token = accessToken;
-    this.channel = 'asdf';
+    this.channel = userData.channel;
     this.socket = this.initSocket();
     this.editor = this.initEditor();
     this.docViewer = this.initDocs();
     this.eventTypes = {
-        GH_USER_GET_REPOS: 'GH_USER_GET_REPOS',
-        GH_USER_SELECT_REPO: 'GH_USER_SELECT_REPO',
+        GH_LOAD_TREE: 'GH_LOAD_TREE',
         GH_USER_SELECT_FILE: 'GH_USER_SELECT_FILE',
-        GH_RENDER_REPO_TREE: 'GH_RENDER_REPO_TREE',
-
         CHAT_SEND_MESSAGE: 'SEND_CHAT_MESSAGE',
         CHAT_RECEIVED_MESSAGE: 'CHAT_RECEIVED_MESSAGE',
         CHAT_LOAD_STREAM: 'CHAT_LOAD_STREAM',
@@ -51,14 +49,13 @@ class CodeSession {
   }
 
   initSocket() {
-    let socket = new SockJS(this.websocketUrl);
+    let socket = new SockJS(this.websocketUrl + this.channel);
 
     socket.onopen = function(e) {
         console.log('[info] Client WebSocket connection established.')
-        console.log(e);
 
-        var initChatMessage = this.buildMessage(this.eventTypes.CHAT_LOAD_STREAM, {});
-        socket.send(initChatMessage);
+        socket.send(buildMessage('GH_LOAD_TREE', userData));
+        //socket.send(this.buildMessage(this.eventTypes.CHAT_LOAD_STREAM, {}));
     };
 
     socket.onmessage = function(received) {
@@ -66,13 +63,9 @@ class CodeSession {
         console.log('[info] Client received data:', message);
 
         switch(message.event) {
-            case this.eventTypes.GH_USER_GET_REPOS:
-            break;
-            case this.eventTypes.GH_USER_SELECT_REPO:
+            case this.eventTypes.GH_LOAD_TREE:
             break;
             case this.eventTypes.GH_USER_SELECT_FILE:
-            break;
-            case this.eventTypes.GH_RENDER_REPO_TREE:
             break;
             case this.eventTypes.CHAT_SEND_MESSAGE:
             break;

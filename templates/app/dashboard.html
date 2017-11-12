@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static compress %}
 
 {% block endhead %}{% endblock %}
 {% block left %}{% endblock %}
@@ -36,9 +36,37 @@
             <h2 class="panel-title">r3wind: Past Sessions</h2>
               <p>Need to revisit a past r3view session? Don't worry. We have your back.</p>
             </div>
-            <div class="panel-body"></div>
+            <div class="panel-body">
+              {% if sessions %}
+              <ul>
+                {% for session in sessions %}
+                  <li>
+                    <a href="{{ session.get_absolute_url }}">{{ session.name }}<strong> @ {{ session.created }}</strong></a>
+                  </li>
+                {% endfor %}
+              </ul>
+              {% else %}
+                <p>No sessions yet!</p>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
     </div>
+{% endblock %}
+
+{% block endbody %}
+  {% compress js %}
+    <script>
+      $(document).on('click', '#session-form button[type="submit"]', function(event) {
+        event.preventDefault();
+        var form = $('#session-form'),
+            url = form.attr('action'),
+            data = form.serialize();
+         $.post(url, data, function(json) {
+            document.location.href = json.url;
+         });
+      });
+    </script>
+  {% endcompress %}
 {% endblock %}

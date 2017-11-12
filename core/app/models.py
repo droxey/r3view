@@ -34,11 +34,12 @@ class CodeSession(models.Model):
 class CodeSessionForm(forms.ModelForm):
     class Meta:
         model = CodeSession
-        fields = ['repo_url', 'repo_branch']
+        fields = ['name', 'repo_url', 'repo_branch']
 
     def __init__(self, *args, **kwargs):
         super(CodeSessionForm, self).__init__(*args, **kwargs)
-        self.request = kwargs.pop('request', None);
+        self.fields['name'].widget = forms.HiddenInput()
+        self.fields['name'].required = False
         self.fields['repo_url'].required = True
         self.fields['repo_url'].widget.attrs = {
             'class': 'form-control',
@@ -51,3 +52,12 @@ class CodeSessionForm(forms.ModelForm):
             'autocomplete': 'off',
             'placeholder': 'master'
         }
+
+    def clean(self):
+        cleaned_data = super(CodeSessionForm, self).clean()
+        url = cleaned_data.get('repo_url', None)
+        name_array = url.split('github.com/')
+        cleaned_data['name'] = name_array[-1]
+        cleaned_data['repo_url'] = url
+        cleaned_data['repo_branch'] = cleaned_data.get('repo_branch', 'master')
+        return cleaned_data

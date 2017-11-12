@@ -5,9 +5,9 @@
     <h4 class="modal-title">Launch a Session</h4>
 </div>
 <div class="modal-body">
-  <form id="session-form" method="POST" action="{% url 'launch' %}" novalidate="novalidate">
+  <form id="session-form" method="POST" action="{% url 'launch' %}">
       {% csrf_token %}
-      <input type="hidden" name="username" value="{{request.user.username}}">
+      {{ form.field.name }}
       <div class="error"></div>
       <div class="form-group">
            <label for="id_repo_url" class="control-label">GitHub Repository URL <span class="asterisk">*</span></label>

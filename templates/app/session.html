@@ -18,11 +18,11 @@
 
 {% block pageheader %}
   <div class="pageheader">
-    <h2><i class="fa far fa-code"></i> Title <span>...and a very brief summary about the application.</span></h2>
+    <h2><i class="fa far fa-code"></i> {{ session.name }}</h2>
     <div class="breadcrumb-wrapper">
       <span class="label">Editing:</span>
       <ol class="breadcrumb">
-        <li><a href="#todo">RepoName</a></li>
+        <li><a href="#todo">{{ session.name }}</a></li>
         <li class="active"><strong>CurrentActiveFile.js</strong></li>
       </ol>
     </div>
@@ -90,7 +90,13 @@
     <script src="{% static 'r3view/js/session.js' %}" type="text/javascript" charset="utf-8"></script>
     <script>
       // Initialize the session.
-      const currentSession = new CodeSession('{{ token }}', '{{ ws_url }}');
+      const userData = {
+        "username": "{{ request.user.username }}'",
+        "repo": "{{ session.repo_url }}",
+        "branch": "{{ session.branch }}",
+        "channel": "{% url 'session' session.slug %}"
+      };
+      const currentSession = new CodeSession('{{ token }}', '{{ ws_url }}', userData);
     </script>
   {% endcompress %}
 {% endblock %}
