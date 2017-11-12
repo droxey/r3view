@@ -73,9 +73,11 @@
       </div>
     </div>
   </section>
-  <footer>
-
-  </footer>
+  <div class="modal launch-modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">{% include "app/codesession_form.html" %}</div>
+    </div>
+  </div>
   {% compress js %}
     <script src="{% static 'ux/js/jquery-1.11.1.min.js' %}"></script>
     <script src="{% static 'ux/js/jquery-migrate-1.2.1.min.js' %}"></script>
@@ -85,6 +87,12 @@
     <script src="{% static 'ux/js/retina.min.js' %}"></script>
     <script src="{% static 'ux/js/jquery.cookies.js' %}"></script>
     <script src="{% static 'ux/js/custom.js' %}"></script>
+    <script>
+      $(document).on('submit', '#session-form', function(event) {
+        event.preventDefault();
+        console.log(event);
+      });
+    </script>
   {% endcompress %}
   {% block endbody %}{% endblock %}
 </body>

@@ -5,21 +5,48 @@ import os
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 # SECURITY WARNING: don't run with debug turned on in production!
 # ===
-ADMINS = (
-    ('Dani Roxberry', 'dani@bitoriented.com'),
+ADMINS = (('Dani Roxberry', 'dani@bitoriented.com'), )
+DEBUG = False
+ALLOWED_HOSTS = ['*']
+
+
+# ===
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+# ===
+
+PROJECT_ROOT = os.path.dirname(os.path.join(os.path.abspath(__file__), '..'))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, '../../static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
 )
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(PROJECT_ROOT, 'templates')
+        ],
+    }
+]
 
-DEBUG = True
+# ===
+# django-compressor
+# ===
+COMPRESS_ENABLED = DEBUG
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
+STATICFILES_FINDERS = ['compressor.finders.CompressorFinder']
 
-ALLOWED_HOSTS = []
-
+# ===
+# Apps
+# ===
 INSTALLED_APPS = [
-    # 3rd Party (overrides)
-    'jet',
-    'jet.dashboard',
-
     # Django
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,9 +67,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,7 +86,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, "templates"),
+            os.path.join(PROJECT_ROOT, "templates"),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -139,18 +165,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
-# ===
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-# ===
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [ STATIC_ROOT ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_FINDERS = [ 'compressor.finders.CompressorFinder' ]
-
-
 # ===
 # Celery
 # ===
@@ -158,19 +172,14 @@ BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 
-# ===
-# django-compressor
-# ===
-COMPRESS_ENABLED = False
-COMPRESS_URL = STATIC_URL
-COMPRESS_ROOT = STATIC_ROOT
 
 # ===
 # r3 specific settings
 # ===
 SOCKJS_PORT = 3456
 SOCKJS_WS_ECHO = 'echo'
-
+SITE_DOMAIN = 'r3view.dev'
+WS_URL = '//{}:{}/{}'.format(SITE_DOMAIN, SOCKJS_PORT, SOCKJS_WS_ECHO)
 
 # ===
 # GitHub oAuth integration
@@ -181,8 +190,6 @@ GITHUB_API = 'https://api.github.com/user'
 SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
 REDIRECT_URL = ''
-
-RANDOMSLUG_LENGTH=9
 
 # ===
 # Load up local_settings.py --- omitted from git!

@@ -5,7 +5,7 @@ const cors = require('cors');
 let app = express();
 app.options('*', cors());
 
-let expressWs = require('express-ws')(app);
+//let expressWs = require('express-ws')(app);
 let server = app.listen(config.port);
 
 require('./conf/express')(app, config, server);

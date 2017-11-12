@@ -3,19 +3,22 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
+from django.core.urlresolvers import reverse
 from django.db import models
 
 from randomslugfield import RandomSlugField
 
 
 class CodeSession(models.Model):
-    slug = RandomSlugField(length=settings.RANDOMSLUG_LENGTH, exclude_digits=True, exclude_vowels=True, editable=False)
-    name = models.CharField(max_length=120)
-    description = models.TextField(null=True, blank=True)
-    repo_url = models.URLField(max_length=255)
-    repo_branch = models.CharField(max_length=80, default="master")
+    slug = RandomSlugField(length=7, exclude_digits=True, exclude_vowels=True)
+    name = models.CharField(max_length=120, null=True)
+    description = models.TextField(null=True)
+    repo_url = models.URLField('GitHub Repository URL', max_length=255,
+        help_text='The URL to your PUBLIC GitHub repo. Starts with http(s).')
+    repo_branch = models.CharField('Select Branch', max_length=80, default="master",
+        help_text='Which branch would you like to review? Default: master.')
     repo_tree = JSONField(null=True)
-    active_file = models.CharField(max_length=120, blank=True, null=True)
+    active_file = models.CharField(max_length=120, null=True)
     owner = models.ForeignKey(User, related_name="owner")
     driver = models.ForeignKey(User, related_name="driver")
     created = models.DateTimeField(auto_now_add=True)
@@ -24,26 +27,33 @@ class CodeSession(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('session', kwargs={'slug': self.slug})
+
 
 class CodeSessionForm(forms.ModelForm):
-    name = forms.CharField(
-        help_text="Assign a friendly name to this code review session. Limit: 120 characters.",
-        widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(
-        label='Topic / Description',
-        help_text="Let your collaborators know what you're working on.",
-        widget=forms.Textarea(attrs={'class': 'form-control'}))
-    repo_url = forms.CharField(
-        label='GitHub Repository URL',
-        help_text='The URL to your PUBLIC GitHub repo. Starts with http(s).',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'rows': 10}))
-    repo_branch = forms.CharField(
-        label='Review Branch',
-        help_text='Which branch would you like to review? Default: master.',
-        widget=forms.TextInput(attrs={'class': 'form-control'}))
-    repo_tree = forms.CharField(widget=forms.HiddenInput())
-
     class Meta:
         model = CodeSession
-        fields = ['name', 'description', 'repo_url', 'repo_branch', 'repo_tree']
+        fields = ['repo_url', 'repo_branch']
 
+    def __init__(self, *args, **kwargs):
+        super(CodeSessionForm, self).__init__(*args, **kwargs)
+        self.request = kwargs.pop('request', None);
+        self.fields['repo_url'].required = True
+        self.fields['repo_url'].widget.attrs = {
+            'class': 'form-control',
+            'autocomplete': 'off',
+            'placeholder': 'https://github.com/username/repository-name'
+        }
+        self.fields['repo_branch'].required = True
+        self.fields['repo_branch'].widget.attrs = {
+            'class': 'form-control',
+            'autocomplete': 'off',
+            'placeholder': 'master'
+        }
+
+    def clean(self):
+        cleaned_data = super(CodeSessionForm, self).clean()
+        cleaned_data.owner = self.request.user
+        cleaned_data.driver = self.request.driver
+        return cleaned_data

@@ -2,7 +2,7 @@
   "name": "r3view",
   "version": "1.0.0",
   "description": "real code, real collaboration, real time solutions",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,7 +29,6 @@
     "nodemon": "1.12.1",
     "opensearch-browser": "1.0.4",
     "serve-favicon": "2.4.5",
-    "sockjs": "0.3.19",
-    "xmlhttprequest": "1.8.0"
+    "sockjs": "0.3.19"
   }
 }

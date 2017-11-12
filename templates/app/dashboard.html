@@ -17,7 +17,11 @@
           <p>Live code review and collaboration at the click of a button.</p>
           </div>
           <div class="panel-body">
-            <p><a class="btn btn-info btn-lg" href="{% url 'launch' %}" data-toggle="modal" data-target=".bs-example-modal-static"><i class fa fa-fw fa-add-circle"></i> Launch a Session</a></p>
+            <p class="text-center">
+              <a class="btn btn-info btn-lg" href="{% url 'launch' %}" data-toggle="modal" data-target=".bs-example-modal-static">
+                <i class="fa fa-magic"></i> Launch a Live Coding Session
+              </a>
+            </p>
           </div>
         </div>
       </div>
@@ -30,22 +34,11 @@
               <a href="" class="minimize">−</a>
             </div>
             <h2 class="panel-title">r3wind: Past Sessions</h2>
-            <p>Need to revisit a past r3view session? Don't worry. We have your back.</p>
+              <p>Need to revisit a past r3view session? Don't worry. We have your back.</p>
             </div>
-            <div class="panel-body">
-
-            </div>
+            <div class="panel-body"></div>
           </div>
         </div>
       </div>
-{% endblock %}
-
-{% block endbody %}
-  <div class="modal fade bs-example-modal-static" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-      </div>
     </div>
-  </div>
 {% endblock %}
