@@ -51,9 +51,3 @@ class CodeSessionForm(forms.ModelForm):
             'autocomplete': 'off',
             'placeholder': 'master'
         }
-
-    def clean(self):
-        cleaned_data = super(CodeSessionForm, self).clean()
-        cleaned_data.owner = self.request.user
-        cleaned_data.driver = self.request.driver
-        return cleaned_data

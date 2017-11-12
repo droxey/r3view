@@ -6,7 +6,7 @@ import os
 # SECURITY WARNING: don't run with debug turned on in production!
 # ===
 ADMINS = (('Dani Roxberry', 'dani@bitoriented.com'), )
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
@@ -15,8 +15,8 @@ ALLOWED_HOSTS = ['*']
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # ===
 
-PROJECT_ROOT = os.path.dirname(os.path.join(os.path.abspath(__file__), '..'))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, '../../static')
+PROJECT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),

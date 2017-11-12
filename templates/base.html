@@ -87,11 +87,27 @@
     <script src="{% static 'ux/js/retina.min.js' %}"></script>
     <script src="{% static 'ux/js/jquery.cookies.js' %}"></script>
     <script src="{% static 'ux/js/custom.js' %}"></script>
+    <script src="{% static 'ux/js/jquery.validate.min.js' %}"></script>
     <script>
-      $(document).on('submit', '#session-form', function(event) {
-        event.preventDefault();
-        console.log(event);
-      });
+    //  $(document).on('click', '#session-form button[type="submit"]', function(event) {
+    //    event.preventDefault();
+        var form = $('#session-form'),
+            url = form.attr('action'),
+            data = form.serialize();
+        form.validate({
+           highlight: function(element) {
+              $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+           },
+           success: function(element) {
+              $(element).closest('.form-group').removeClass('has-error');
+           },
+           submitHandler: function(form) {
+             $.post(url, data, function(result) {
+               console.log(result);
+             });
+           }
+        });
+      //});
     </script>
   {% endcompress %}
   {% block endbody %}{% endblock %}

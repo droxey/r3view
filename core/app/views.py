@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import logout as auth_logout, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.views.generic import DetailView
@@ -19,25 +19,6 @@ from core.app.models import CodeSession, CodeSessionForm
 @login_required
 def dashboard(request, username):
     return render(request, 'app/dashboard.html', {})
-
-
-@login_required
-def session(request, slug):
-    try:
-        session = CodeSession.objects.get(slug=slug)
-        oauth = UserSocialAuth.objects.get(user=session.owner, provider='github')
-        token = oauth.extra_data['access_token']
-    except CodeSession.DoesNotExist:
-        return redirect('launch')
-    except UserSocialAuth.DoesNotExist:
-        token = None
-
-    return render(request, 'session.html', {
-        'ws_url': ws_url,
-        'token': token,
-        'session': session
-    })
-
 
 def home(request):
     if request.user.is_authenticated():
@@ -82,34 +63,46 @@ class CodeSessionCreate(LoginRequiredMixin, AjaxableResponseMixin, CreateView):
     model = CodeSession
     form_class = CodeSessionForm
 
+    def form_valid(self, form):
+        name = '{}/{}'.format(
+            self.request.user.username,
+            str(form.fields['repo_url']).split('/')[:-1])
+        branch = 'heads/{}'.format(form.fields['repo_branch'])
+
+        obj = form.save(commit=False)
+        obj.name = name
+        obj.repo_branch = branch
+        obj.owner = self.request.user
+        obj.driver = self.request.user
+        obj.save()
+
+        return redirect(obj.get_absolute_url())
+
 
 class CodeSessionDetailView(AjaxableResponseMixin, DetailView):
     """ GET. Gets data about a user. """
     model = CodeSession
-    template = 'app/session.html'
+    template_name = 'app/session.html'
 
     def get_queryset(self):
         """ Override `get_queryset`. This filtered query is then used
         in subsequent `get_object` calls to fetch specific objects. """
-        queryset = super(CodeSession, self).get_queryset()
+        queryset = super(CodeSessionDetailView, self).get_queryset()
         return queryset.filter(owner=self.request.user)
 
     def get_object(self, queryset=None):
-        return super(CodeSession, self).get_object(queryset=queryset)
+        return super(CodeSessionDetailView, self).get_object(queryset=queryset)
 
     def get_context_data(self, **kwargs):
         context = super(CodeSessionDetailView,
                         self).get_context_data(**kwargs)
-        try:
-            session = CodeSession.objects.get(slug=self.request.slug)
-            oauth = UserSocialAuth.objects.get(user=session.owner, provider='github')
-            context['token'] = oauth.extra_data['access_token']
-        except CodeSession.DoesNotExist:
-            return redirect('launch')
-        except UserSocialAuth.DoesNotExist:
-            context['token'] = None
-        context['ws_url'] = settings.WS_URL
-        context['session'] = session
+        session = context.get('codesession', None)
+        oauth = UserSocialAuth.objects.get(user=session.owner, provider='github')
+        context.update({
+            'token': oauth.extra_data['access_token'],
+            'ws_url': settings.WS_URL,
+            'session': session
+        })
         return context
 
 
