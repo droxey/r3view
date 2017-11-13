@@ -137,22 +137,29 @@ h3.sidebartitle {
 /* line 65, ../sass/screen.scss */
 #session #right-container #chat .panel ul li,
 #session #right-container #docs .panel ul li {
+  cursor: pointer;
   display: block;
   position: relative;
   z-index: 10;
 }
-/* line 70, ../sass/screen.scss */
+/* line 71, ../sass/screen.scss */
 #session #right-container #chat .panel ul li small,
 #session #right-container #docs .panel ul li small {
-  font-size: 12px;
+  font-size: 13px;
 }
-/* line 76, ../sass/screen.scss */
+/* line 74, ../sass/screen.scss */
+#session #right-container #chat .panel ul li small.pull-right,
+#session #right-container #docs .panel ul li small.pull-right {
+  text-transform: uppercase;
+  font-size: 10px;
+}
+/* line 82, ../sass/screen.scss */
 #session #right-container #chat .panel form,
 #session #right-container #docs .panel form {
   padding: 8px;
-  background: #16283A;
+  background: #eee;
 }
-/* line 84, ../sass/screen.scss */
+/* line 90, ../sass/screen.scss */
 #session #right-container #chat .panel-heading,
 #session #right-container #docs .panel-heading {
   border-top-left-radius: 0;
@@ -161,7 +168,7 @@ h3.sidebartitle {
   position: relative;
   z-index: 10000;
 }
-/* line 93, ../sass/screen.scss */
+/* line 99, ../sass/screen.scss */
 #session #right-container #chat .panel-heading h3.panel-title i.fa,
 #session #right-container #docs .panel-heading h3.panel-title i.fa {
   display: inline-block;
@@ -171,69 +178,69 @@ h3.sidebartitle {
   vertical-align: middle;
   margin-top: 0;
 }
-/* line 105, ../sass/screen.scss */
+/* line 111, ../sass/screen.scss */
 #session #right-container #docs {
   margin-top: 1px;
 }
 
-/* line 117, ../sass/screen.scss */
+/* line 123, ../sass/screen.scss */
 #session-form div.form-group label {
   font-variant: all-petite-caps;
   font-weight: 700;
   font-size: 18px;
 }
-/* line 123, ../sass/screen.scss */
+/* line 129, ../sass/screen.scss */
 #session-form div.form-group textarea {
   height: 100px;
 }
-/* line 127, ../sass/screen.scss */
+/* line 133, ../sass/screen.scss */
 #session-form div.form-group span.helptext {
   font-size: 11px;
   line-height: 13px;
 }
 
-/* line 134, ../sass/screen.scss */
+/* line 140, ../sass/screen.scss */
 div.logopanel {
   border-right: 0 none;
 }
 
-/* line 138, ../sass/screen.scss */
+/* line 144, ../sass/screen.scss */
 .oauth-login-btn {
   display: block;
   margin: 9px 8px;
   font-weight: 500;
 }
 
-/* line 144, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 .headerbar .topnav > ul > li > a {
   padding: 18px 15px 17px 15px;
 }
 
-/* line 149, ../sass/screen.scss */
+/* line 155, ../sass/screen.scss */
 .mainpanel .contentpanel {
   padding: 0;
 }
 
-/* line 154, ../sass/screen.scss */
+/* line 160, ../sass/screen.scss */
 .pageheader {
   padding: 15px 7px;
 }
-/* line 157, ../sass/screen.scss */
+/* line 163, ../sass/screen.scss */
 .pageheader .fa {
   border-radius: 0;
   border: none;
 }
-/* line 162, ../sass/screen.scss */
+/* line 168, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper {
   right: 0;
   position: relative;
   bottom: 10px;
 }
-/* line 167, ../sass/screen.scss */
+/* line 173, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb {
   margin: 0;
 }
-/* line 171, ../sass/screen.scss */
+/* line 177, ../sass/screen.scss */
 .pageheader .breadcrumb-wrapper ul.breadcrumb li a {
   display: inline-block;
   height: 52px;

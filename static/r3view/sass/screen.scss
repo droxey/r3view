@@ -63,19 +63,25 @@ h3.sidebartitle {
                   top: 0;
 
                     li {
+                      cursor: pointer;
                       display: block;
                       position: relative;
                       z-index: 10;
 
                         small {
-                            font-size: 12px;
+                            font-size: 13px;
+
+                            &.pull-right {
+                              text-transform: uppercase;
+                              font-size: 10px;
+                            }
                         }
                     }
                 }
 
                 form {
                   padding: 8px;
-                  background: #16283A;
+                  background: #eee;
                 }
             }
 
