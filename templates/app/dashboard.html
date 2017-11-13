@@ -6,19 +6,18 @@
 
 
 {% block center %}
-  <div class="row">
-    <div class="col-md-12">
+  <div class="row" style="margin-top: 60px;">
+    <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-btns">
-            <a href="" class="minimize">−</a>
           </div>
           <h2 class="panel-title">r3view: Getting Started</h2>
           <p>Live code review and collaboration at the click of a button.</p>
           </div>
           <div class="panel-body">
             <p class="text-center">
-              <a class="btn btn-info btn-lg" href="{% url 'launch' %}" data-toggle="modal" data-target=".bs-example-modal-static">
+              <a class="btn btn-success btn-lg" href="{% url 'launch' %}" data-toggle="modal" data-target=".bs-example-modal-static">
                 <i class="fa fa-magic"></i> Launch a Live Coding Session
               </a>
             </p>
@@ -27,24 +26,38 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-btns">
-              <a href="" class="minimize">−</a>
             </div>
             <h2 class="panel-title">r3wind: Past Sessions</h2>
               <p>Need to revisit a past r3view session? Don't worry. We have your back.</p>
             </div>
             <div class="panel-body">
               {% if sessions %}
-              <ul>
-                {% for session in sessions %}
-                  <li>
-                    <a href="{{ session.get_absolute_url }}">{{ session.name }}<strong> @ {{ session.created }}</strong></a>
-                  </li>
-                {% endfor %}
-              </ul>
+                <div class="table-responsive">
+                  <table class="table table-info mb30">
+                      <thead>
+                        <tr>
+                          <th>Session Name</th>
+                          <th>Branch</th>
+                          <th>Repo URL</th>
+                          <th>Last Updated</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for session in sessions %}
+                          <tr>
+                            <td><a href="{{ session.get_absolute_url }}" title="re3wind: {{ session.name }}" target="_blank">{{ session.name }}</a></td>
+                            <td>{{ session.repo_branch }}</td>
+                            <td><a href="{{ session.repo_url }}" target="_blank" title="View on GitHub">View on GitHub</a></td>
+                            <td>{{ session.updated }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                  </table>
+                </div>
               {% else %}
                 <p>No sessions yet!</p>
               {% endif %}

@@ -26,7 +26,7 @@ class CodeSession {
         enableBasicAutocompletion: true,
         enableSnippets: true,
         enableLiveAutocompletion: false,
-        readOnly: true
+        readOnly: false
     });
     codeEditor.session.setMode('ace/mode/javascript');
     return codeEditor;

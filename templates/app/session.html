@@ -22,7 +22,7 @@
       <span class="label">Editing:</span>
       <ol class="breadcrumb">
         <li><a href="#todo">{{ session.name }}</a></li>
-        <li class="active"><strong>CurrentActiveFile.js</strong></li>
+        <li class="active"><strong>server.js</strong></li>
       </ol>
     </div>
   </div>
@@ -32,7 +32,22 @@
 {% block center %}
   <div id="session" class="row">
     <div id="editor-container" class="col-md-8">
-      <div id="editor"></div>
+      <div id="editor">{% spaceless %}const express = require('express');
+const config = require('./config/conf');
+const cors = require('cors');
+
+let app = express();
+app.options('*', cors());
+
+let expressWs = require('express-ws')(app);
+let server = app.listen(config.port);
+
+require('./config/express')(app, config, server);
+
+app.listen(config.port, function () {
+  console.log('Server listening on port:', config.port);
+  require('./config/sock')(app, server);
+});{% endspaceless %}</div>
     </div>
     <div id="right-container" class="col-md-4">
       <div id="chat" class="row">
