@@ -20,3 +20,7 @@ r3view: real code, real collaboration, real time.
     * PostgreSQL 9.6
     * Python 3
     * Node
+
+#### Final Notes
+    * Total hours clocked: 22.75.
+    * I promise I write prettier code than this :)
