@@ -93,6 +93,7 @@ class CodeSessionDetailView(AjaxableResponseMixin, DetailView):
                         self).get_context_data(**kwargs)
         session = context.get('codesession', None)
         oauth = UserSocialAuth.objects.get(user=session.owner, provider='github')
+        ws_url = '/echo/'
         context.update({
             'token': oauth.extra_data['access_token'],
             'ws_url': settings.WS_URL,

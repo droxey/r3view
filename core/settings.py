@@ -177,9 +177,8 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 # r3 specific settings
 # ===
 SOCKJS_PORT = 7888
-SOCKJS_WS_ECHO = 'echo'
 SITE_DOMAIN = 'r3view.dev'
-WS_URL = '//{}:{}/{}'.format(SITE_DOMAIN, SOCKJS_PORT, SOCKJS_WS_ECHO)
+WS_URL = '//{}:{}/echo'.format(SITE_DOMAIN, SOCKJS_PORT)
 
 # ===
 # GitHub oAuth integration

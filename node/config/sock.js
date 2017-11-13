@@ -16,6 +16,7 @@ module.exports = function(app, server) {
         CHAT_RECEIVED_MESSAGE: 'CHAT_RECEIVED_MESSAGE',
         CHAT_LOAD_STREAM: 'CHAT_LOAD_STREAM',
     };
+    var chatStream;
 
     sockJSEcho.on('connection', function(conn) {
         conn.write("[info] Server WebSocket connection established.");
@@ -23,32 +24,13 @@ module.exports = function(app, server) {
         clients[clientID] = conn;
 
         conn.on('data', function(message) {
-            conn.write('[info] Server received data:', JSON.stringify(message));
-            switch (message.event) {
-              case eventTypes.GH_LOAD_TREE:
-                require('./github')(
-                  conn,
-                  message.token,
-                  message.data.username,
-                  message.data.repo,
-                  message.data.branch);
-                break;
-              case eventTypes.GH_USER_SELECT_FILE:
-                break;
-              case eventTypes.CHAT_SEND_MESSAGE:
-                break;
-              case eventTypes.CHAT_RECEIVED_MESSAGE:
-                break;
-              case eventTypes.CHAT_LOAD_STREAM:
-                break;
-              default:
-                console.log('Unkown event type:', message.event);
-                break;
-            }
+          console.log(JSON.stringify(message))
+          // this is where you'd persist it
         });
 
         conn.on('close', function() {
             conn.write('[info] User disconnected.');
+            conn.end();
             delete clients[conn.id];
         });
     });

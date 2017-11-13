@@ -3,9 +3,8 @@
 
 
 {% block endhead %}
-  {% compress js %}
-
-
+  {% compress css %}
+    <link href="{% static 'r3view/stylesheets/animate.css' %}" media="screen, projection" rel="stylesheet">
   {% endcompress %}
 {% endblock %}
 
@@ -37,45 +36,38 @@
     </div>
     <div id="right-container" class="col-md-4">
       <div id="chat" class="row">
-          <div class="panel panel-default panel-alt widget-messaging">
-            <div class="panel-heading">
-                <div class="panel-btns"></div>
-                <h3 class="panel-title"><i class="fa fa-comments"></i> Chat</h3>
-              </div>
-              <div class="panel-body">
-                <ul>
-                  <li>
-                    <small class="pull-right">Dec 10</small>
-                    <h4 class="sender">droxey</h4>
-                    <small>Lorem ipsum dolor sit amet...</small>
-                  </li>
-                  <li>
-                    <small class="pull-right">Dec 9</small>
-                    <h4 class="sender">somedude</h4>
-                    <small>Lorem ipsum dolor sit amet...</small>
-                  </li>
-                  <li>
-                    <small class="pull-right">Dec 9</small>
-                    <h4 class="sender">anotherguy</h4>
-                    <small>Lorem ipsum dolor sit amet...</small>
-                  </li>
-                </ul>
-              </div>
-            </div>
-        </div>
-      <div id="docs" class="row">
-          <div class="panel panel-default panel-alt widget-messaging">
-            <div class="panel-heading">
+        <div class="panel panel-default panel-alt widget-messaging">
+          <div class="panel-heading">
               <div class="panel-btns"></div>
-              <h3 class="panel-title"><i class="fa fa-book"></i> Documentation</h3>
+              <h3 class="panel-title"><i class="fa fa-comments"></i> Chat</h3>
             </div>
             <div class="panel-body">
-              <iframe id="devdocs" src="http://devdocs.io" scrolling="yes" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"></iframe>
+              <ul id="chat-ul"></ul>
+                <form id="chat-form">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-comment"></i></span>
+                    <input name="comment" type="text" class="form-control" placeholder="Type here to chat..." autocomplete="off">
+                    <input type="hidden" name="username" value="{{ request.user.username }}">
+                    <span class="input-group-btn"><button id="chat-btn" type="submit" class="btn btn-default">Go!</button></span>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
+          <div id="docs" class="row">
+              <div class="panel panel-default panel-alt widget-messaging">
+                <div class="panel-heading">
+                  <div class="panel-btns"></div>
+                  <h3 class="panel-title"><i class="fa fa-book"></i> Documentation</h3>
+                </div>
+                <div class="panel-body">
+                  <iframe id="devdocs" src="//devdocs.io" scrolling="yes" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0"></iframe>
+                </div>
+              </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 {% endblock %}
 
 
@@ -87,9 +79,22 @@
     <script src="{% static 'js/ace/mode-javascript.js' %}" type="text/javascript" charset="utf-8"></script>
     <script src="{% static 'js/ace/ext-modelist.js' %}" type="text/javascript" charset="utf-8"></script>
     <script src="{% static 'js/ace/ext-language_tools.js' %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static 'ux/js/moment.js' %}" type="text/javascript" charset="utf-8"></script>
     <script src="{% static 'r3view/js/session.js' %}" type="text/javascript" charset="utf-8"></script>
     <script>
-      // Initialize the session.
+      $.fn.extend({
+          animateCss: function (animationName, callback) {
+              var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+              this.addClass('animated ' + animationName).one(animationEnd, function() {
+                  $(this).removeClass('animated ' + animationName);
+                  if (callback) {
+                    callback();
+                  }
+              });
+              return this;
+          }
+      });
+
       const userData = {
         "username": "{{ request.user.username }}'",
         "repo": "{{ session.repo_url }}",

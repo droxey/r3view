@@ -42,7 +42,7 @@ h3.sidebartitle {
 
         #chat,
         #docs {
-            height: 425px;
+            height: 442px;
             width: 100%;
             margin: 0;
             background: white;
@@ -55,11 +55,27 @@ h3.sidebartitle {
                 margin: 1px 0px 0 0;
 
                 ul {
+                  background: white;
+                  position: relative;
+                  z-index: 1;
+                  height: 331px;
+                  overflow-y: scroll;
+                  top: 0;
+
                     li {
+                      display: block;
+                      position: relative;
+                      z-index: 10;
+
                         small {
-                            font-size: 11px;
+                            font-size: 12px;
                         }
                     }
+                }
+
+                form {
+                  padding: 8px;
+                  background: #16283A;
                 }
             }
 
@@ -69,8 +85,11 @@ h3.sidebartitle {
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
                 padding: 16px 20px;
+                position: relative;
+                z-index: 10000;
 
                 h3.panel-title  {
+
                     i.fa {
                         display: inline-block;
                         position: relative;
@@ -111,7 +130,6 @@ h3.sidebartitle {
         }
     }
 }
-
 
 div.logopanel {
     border-right: 0 none;

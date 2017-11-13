@@ -3,26 +3,10 @@ class CodeSession {
     this.userData = userData;
     this.websocketUrl = websocketUrl;
     this.token = accessToken;
-    this.channel = userData.channel;
+    this.channel = this.userData.channel;
     this.socket = this.initSocket();
     this.editor = this.initEditor();
     this.docViewer = this.initDocs();
-    this.eventTypes = {
-        GH_LOAD_TREE: 'GH_LOAD_TREE',
-        GH_USER_SELECT_FILE: 'GH_USER_SELECT_FILE',
-        CHAT_SEND_MESSAGE: 'SEND_CHAT_MESSAGE',
-        CHAT_RECEIVED_MESSAGE: 'CHAT_RECEIVED_MESSAGE',
-        CHAT_LOAD_STREAM: 'CHAT_LOAD_STREAM',
-    };
-  }
-
-  buildMessage(event, data={}) {
-    return JSON.stringify({
-        channel: this.channel,
-        data: data,
-        event: event,
-        token: this.accessToken
-    });
   }
 
   initEditor() {
@@ -49,38 +33,91 @@ class CodeSession {
   }
 
   initSocket() {
-    let socket = new SockJS(this.websocketUrl + this.channel);
+    let socket = new SockJS(this.websocketUrl);
+    let chatUL = $('#chat-ul');
+    let chatForm = $('#chat-form');
 
-    socket.onopen = function(e) {
-        console.log('[info] Client WebSocket connection established.')
-
-        socket.send(buildMessage('GH_LOAD_TREE', userData));
-        //socket.send(this.buildMessage(this.eventTypes.CHAT_LOAD_STREAM, {}));
+    function objectifyForm(formArray) {
+      var returnArray = {};
+      for (var i = 0; i < formArray.length; i++){
+        returnArray[formArray[i]['name']] = formArray[i]['value'];
+      }
+      return returnArray;
     };
 
-    socket.onmessage = function(received) {
-        var message = JSON.parse(JSON.stringify(received.data));
-        console.log('[info] Client received data:', message);
+    chatForm.on('submit', function(e) {
+      e.preventDefault();
+      var data = objectifyForm(chatForm.serializeArray());
+      data.datetime = moment().calendar();
+      sendChatMessage(data);
+      chatForm.find('[name="comment"]').val('');
+    });
 
-        switch(message.event) {
-            case this.eventTypes.GH_LOAD_TREE:
-            break;
-            case this.eventTypes.GH_USER_SELECT_FILE:
-            break;
-            case this.eventTypes.CHAT_SEND_MESSAGE:
-            break;
-            case this.eventTypes.CHAT_RECEIVED_MESSAGE:
-            break;
-            case this.eventTypes.CHAT_LOAD_STREAM:
-            break;
-            default:
-                console.log('Unkown event type:', message.event);
-                break;
+    let sendChatMessage = function(data) {
+      buildChatUI(data);
+      return JSON.stringify({
+          "channel": self.channel,
+          "data": data,
+          "event": "CHAT_MESSAGE",
+          "token": self.accessToken
+      });
+    };
+
+    let buildChatUI = function(data) {
+      var template =
+        `<li class="animated slideInDown">
+          <small class="pull-right">${data.datetime}</small>
+          <h4 class="sender">${data.username}</h4>
+          <small>${data.comment}</small>
+        </li>`;
+
+        chatUL.prepend($(template));
+    };
+
+    let tinyChatbot = function() {
+      let chatbotCopy = [
+        'Welcome to r3view! Wondering how it works? Paste some JavaScript code in the editor!',
+        'Not too shabby, right? It gets better. The link in your browser? You can share it with friends and collegues anytime you want to talk about code!',
+        'Anyone who has the secret link can join in on the live discussion, or leave a message you can look back on later.',
+        'Why not give it a try now? :)',
+      ];
+
+      var counter = 0;
+      let intervalId = setInterval(sendBotMessage, 4000);
+
+      function sendBotMessage() {
+        if (counter >= chatbotCopy.length - 1) {
+          clearInterval(intervalId);
         }
+
+        socket.send(sendChatMessage({
+          'username': 'system',
+          'comment': chatbotCopy[counter],
+          'datetime': moment().calendar()
+        }));
+
+        counter++;
+      };
+    }
+
+    socket.onopen = function(e) {
+      console.log('[info] Client WebSocket connection established.');
+    };
+
+    socket.onmessage = function(data) {
+      let initialized = false;
+      if (!initialized) {
+        initialized = true;
+        tinyChatbot();
+      }
+      else {
+        buildChatUI(data);
+      }
     };
 
     return socket;
   }
+
 
   initDocs() {
     var devDocs = jQuery('#devdocs');
