@@ -348,7 +348,7 @@ oop.inherits(IncrementalSearchKeyboardHandler, HashHandler);
 
     var handleKeyboard$super = this.handleKeyboard;
     this.handleKeyboard = function(data, hashId, key, keyCode) {
-        if (((hashId === 1/*ctrl*/ || hashId === 8/*command*/) && key === 'v')
+        if ((((hashId === 1/*ctrl*/ || hashId === 8)/*command*/) && key === 'v')
          || (hashId === 1/*ctrl*/ && key === 'y')) return null;
         var cmd = handleKeyboard$super.call(this, data, hashId, key, keyCode);
         if (cmd.command) { return cmd; }

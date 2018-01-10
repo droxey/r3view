@@ -45,7 +45,7 @@ define("ace/mode/livescript",["require","exports","module","ace/tokenizer","ace/
     var indenter, prototype = extend$((import$(LiveScriptMode, superclass).displayName = 'LiveScriptMode', LiveScriptMode), superclass).prototype, constructor = LiveScriptMode;
     function LiveScriptMode(){
       var that;
-      this.$tokenizer = new (require('../tokenizer')).Tokenizer(LiveScriptMode.Rules);
+      this.$tokenizer = new (require('../tokenizer').Tokenizer)(LiveScriptMode.Rules);
       if (that = require('../mode/matching_brace_outdent')) {
         this.$outdent = new that.MatchingBraceOutdent;
       }
